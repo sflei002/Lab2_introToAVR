@@ -40,29 +40,23 @@ int main(void) {
 
 	park_4 = PINA & 0x08;
 
-	park_1 = park_1;
+	cntavail = park_1 + (park_2 >> 1) + (park_3 >> 2) + (park_4 >> 3);
 
-	park_2 = park_2 >> 1;
+	if(cntavail >= 0x04){
 
-	park_3 = park_3 >> 2;
-
-	park_4 = park_4 >> 3;
-
-	cntavail = park_1 + park_2 + park_3 + park_4;
+		PORTC = 0x80;
+}
 
 
-	if(cntavail <= 0x04){
+
+	else{
 
 		cntavail = 0x04 - cntavail;
-}
 
-	else {
+		PORTC = cntavail;
 
-		cntavail = 0x00;
 
 }
-
-	PORTC = cntavail;
 	
 }
 }
